@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AdressLocator
+﻿namespace AdressLocator
 {
     public class Adress
     {
-        public string locality { get; set; }
-        public string zip { get; set; }
-        public string street { get; set; }
-        public string streetNumber { get; set; }
-        public string longitude { get; set; }
-        public string latitude { get; set; }
+        public string Locality { get; set; }
+        public string Zip { get; set; }
+        public string Street { get; set; }
+        public string StreetNumber { get; set; }
+        public Coordinate Coordinate { get; set; }
     }
 }

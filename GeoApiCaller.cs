@@ -1,45 +1,46 @@
 ﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AdressLocator
 {
-    public class GeoApiCaller
+    public class GeoApiCaller : IGeoApiCaller
     {
-        HttpClient client;
+        private HttpClient client;
 
-        public GeoApiCaller(string baseAdress) {
-            client = new HttpClient();
-            client.BaseAddress = new Uri(baseAdress);
-            client.DefaultRequestHeaders.Accept.Clear();
+        public GeoApiCaller(string hostAdress)
+        {
+            client = new HttpClient
+            {
+                BaseAddress = new Uri(hostAdress)
+            };    
         }
 
-
-        private string serializeAdress(Adress adress)
+        private string SerializeAdress(Adress adress)
         {
-            return String.Format("{{" +
-                "\"Locality\":\"{0}\"," +
-                "\"Zip\":\"{1}\"," +
-                "\"Street\":\"{2}\"," +
-                "\"StreetNumber\":\"{3}\"" +
-                "}}", adress.locality, adress.zip, adress.street, adress.streetNumber);
+            return JsonConvert.SerializeObject(adress);
         }
 
-        public async Task<string> GetLongitudeLatitude(Adress adress)
+        private Coordinate DeserializeResponse(string response)
         {
-            string requestBody = serializeAdress(adress);
-            var stringContent = new StringContent(requestBody, UnicodeEncoding.UTF8, "application/json");
+            return JsonConvert.DeserializeObject<Coordinate>(response);
+        }
+
+        public async Task<Adress> GetLongitudeLatitude(Adress adress)
+        {
+            string requestBody = SerializeAdress(adress);
+            StringContent stringContent = new StringContent(requestBody, UnicodeEncoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync("api/geo", stringContent);
-            string answer = "";
+            
             if (response.IsSuccessStatusCode)
             {
-                answer = await response.Content.ReadAsStringAsync();
+                Coordinate coords = DeserializeResponse(response.Content.ReadAsStringAsync().Result);
+                adress.Coordinate = coords;
             }
-            return answer;
+            
+            return adress;
         }
     }
 
