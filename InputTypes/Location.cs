@@ -9,8 +9,8 @@ namespace AdressLocator.InputTypes
     class Location
     {
         private static int[] entryList = new int[] { 4, 7 };
-        string Plz { get; set; }
-        string Locality { get; set; }
+        public string Plz { get; set; }
+        public string Locality { get; set; }
 
         public Location(string[] values)
         {

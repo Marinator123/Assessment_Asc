@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AdressLocator
+namespace AdressLocator.InputTypes
 {
     interface IEntryHandler
     {
