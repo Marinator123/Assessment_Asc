@@ -13,9 +13,8 @@ namespace AdressLocator
     {
         static void Main(string[] args)
         {
-            
-            string filePath = "./Data/Post_Adressdaten20170425.csv";
-            //string filePath = "./Data/Adressdaten_Subset.csv";
+            //string filePath = "./Data/Post_Adressdaten20170425.csv";
+            string filePath = "./Data/Adressdaten_Subset.csv";
             char[] delimiters = new char[] {';'};
 
             FileToAdressConverter fileReader = new FileToAdressConverter();
@@ -25,13 +24,16 @@ namespace AdressLocator
             GeoApiCaller caller = new GeoApiCaller("http://localhost:5000/");
             AdressToGeoJsonConverter geoJsonExporter = new AdressToGeoJsonConverter(@"C:\temp\export.json");
 
+            Adress first = adresses.First();
             foreach(Adress adress in adresses)
             {
                 Adress geoLocatedAdress = caller.GetLongitudeLatitude(adress).Result;
+                if (!adress.Equals(first))
+                {
+                    geoJsonExporter.EndFeature();
+                }
                 geoJsonExporter.WriteAdressToFile(geoLocatedAdress);
-                //Console.WriteLine(geoLocatedAdress.Locality);
             }
-
             geoJsonExporter.CloseFile();
         }
     }

@@ -16,6 +16,7 @@ namespace AdressLocator.FileIO
         {   try
             {
                 geoJsonFile = new StreamWriter(filePath);
+                geoJsonFile.Write(GetHeader());
             }
             catch (Exception)
             {
@@ -23,7 +24,28 @@ namespace AdressLocator.FileIO
             }
         }
 
-        public void CloseFile() => geoJsonFile.Close();
+        private string GetHeader()
+        {
+            return "{\n" +
+                "\t\"type\": \"FeatureCollection\",\n" +
+                "\t\"features\": [\n";
+        }
+
+        private string GetFooter()
+        {
+            return "\n\t]\n" +
+                "}";
+        }
+
+        public void EndFeature()
+        {
+            geoJsonFile.Write(",\n");
+        }
+
+        public void CloseFile() {
+            geoJsonFile.Write(GetFooter());
+            geoJsonFile.Close();
+        }
 
 
         public void WriteAdressToFile(Adress adress)
@@ -39,19 +61,19 @@ namespace AdressLocator.FileIO
         public static string getGeoJson(Adress adress)
         {
             return String.Format(
-                "{{\n" +
-                "\t\"type\": \"Feature\",\n" +
-                "\t\"geometry\": {{\n" +
-                "\t\t\"type\": \"Point\",\n" +
-                "\t\t\"coordinates\": [{0},{1}]\n" +
-                "\t}},\n" +
-                "\t\"properties\": {{\n" +
-                "\t\t\"street\": \"{2}\",\n" +
-                "\t\t\"street number\": \"{3}\",\n" +
-                "\t\t\"zip\": \"{4}\",\n" +
-                "\t\t\"locality\": \"{5}\"\n" +
-                "\t}}\n" +
-                "}}"
+                "\t{{\n" +
+                "\t\t\"type\": \"Feature\",\n" +
+                "\t\t\"geometry\": {{\n" +
+                "\t\t\t\"type\": \"Point\",\n" +
+                "\t\t\t\"coordinates\": [{0},{1}]\n" +
+                "\t\t}},\n" +
+                "\t\t\"properties\": {{\n" +
+                "\t\t\t\"street\": \"{2}\",\n" +
+                "\t\t\t\"street number\": \"{3}\",\n" +
+                "\t\t\t\"zip\": \"{4}\",\n" +
+                "\t\t\t\"locality\": \"{5}\"\n" +
+                "\t\t}}\n" +
+                "\t}}"
                 , adress.Coordinate.Longitude, adress.Coordinate.Latitude, adress.Street, adress.StreetNumber,
                     adress.Zip, adress.Locality);
         }
