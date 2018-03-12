@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using AdressLocator.Entities;
 
@@ -10,55 +8,72 @@ namespace AdressLocator.FileIO
 {
     class AdressToGeoJsonConverter
     {
-
+        string filePath;
         StreamWriter geoJsonFile;
         public AdressToGeoJsonConverter(string filePath)
-        {   try
+        {
+            this.filePath = filePath;
+        }
+
+        public void OpenFile()
+        {
+            try
             {
                 geoJsonFile = new StreamWriter(filePath);
-                geoJsonFile.Write(GetHeader());
+                geoJsonFile.Write(GeoJsonFormatter.GetHeader());
             }
             catch (Exception)
             {
-                Console.WriteLine("File Generation failed!");
+                Console.WriteLine("Opening File failed!");
             }
         }
 
-        private string GetHeader()
+        public void ExportAdressesToOutput(List<Adress> geoLocatedAdresses)
+        {
+            Adress first = geoLocatedAdresses.First();
+            foreach (Adress geoLocatedAdress in geoLocatedAdresses)
+            {
+                if (!geoLocatedAdress.Equals(first))
+                {
+                    geoJsonFile.Write(GeoJsonFormatter.GetFeatureEnd());
+                }
+                this.WriteAdressToFile(geoLocatedAdress);
+            }
+        }
+
+        public void CloseFile() {
+            geoJsonFile.Write(GeoJsonFormatter.GetFooter());
+            geoJsonFile.Close();
+        }
+
+        private void WriteAdressToFile(Adress adress)
+        {
+            string geoJsonPoint = GeoJsonFormatter.GetGeoJsonAdress(adress);
+            geoJsonFile.Write(geoJsonPoint);
+        }
+    }
+
+    static class GeoJsonFormatter
+    {
+        public static string GetHeader()
         {
             return "{\n" +
                 "\t\"type\": \"FeatureCollection\",\n" +
                 "\t\"features\": [\n";
         }
 
-        private string GetFooter()
+        public static string GetFooter()
         {
             return "\n\t]\n" +
                 "}";
         }
 
-        public void EndFeature()
+        public static string GetFeatureEnd()
         {
-            geoJsonFile.Write(",\n");
+            return ",\n";
         }
 
-        public void CloseFile() {
-            geoJsonFile.Write(GetFooter());
-            geoJsonFile.Close();
-        }
-
-
-        public void WriteAdressToFile(Adress adress)
-        {
-            string geoJson = GeoJsonPoint.getGeoJson(adress);
-            geoJsonFile.Write(geoJson);
-        }
-    }
-
-
-    struct GeoJsonPoint
-    {
-        public static string getGeoJson(Adress adress)
+        public static string GetGeoJsonAdress(Adress adress)
         {
             return String.Format(
                 "\t{{\n" +

@@ -1,6 +1,6 @@
 ﻿namespace AdressLocator.Entities
 {
-    public class Coordinate
+    public struct Coordinate
     {
         public string Latitude { get; set; }
         public string Longitude { get; set; }

@@ -1,26 +1,30 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Threading.Tasks;
 using AdressLocator.InputTypes;
 using AdressLocator.Entities;
 
 namespace AdressLocator.FileIO
 {
-    public class FileToAdressConverter {
+    public static class FileToAdressConverter {
 
-        private Dictionary<string, Location> plzList = new Dictionary<string, Location>();
-        private Dictionary<string, Street> streetList = new Dictionary<string, Street>();
-        List<Building> buildings = new List<Building>();
+        private static Dictionary<string, Location> plzList = new Dictionary<string, Location>();
+        private static Dictionary<string, Street> streetList = new Dictionary<string, Street>();
+        private static List<Building> buildings = new List<Building>();
 
-        public void ConvertFileToLists(string filePath, char[] lineDelimiters)
+        public static List<Adress> ExtractAdressesFromFile(string filePath, char[] lineDelimiters)
+        {
+            ConvertFileToLists(filePath, lineDelimiters);
+            return GetAdresses();
+        }
+
+        private static void ConvertFileToLists(string filePath, char[] lineDelimiters)
         {
             try
             {
                 string csvData = File.ReadAllText(filePath, Encoding.Default);
-                String[] lines = csvData.Split('\n');
+                string[] lines = csvData.Split('\n');
                 foreach (string row in lines)
                 {
                     string[] words = row.Split(lineDelimiters);
@@ -46,7 +50,7 @@ namespace AdressLocator.FileIO
             }
         }
 
-        public List<Adress> GetAdresses()
+        private static List<Adress> GetAdresses()
         {
             List<Adress> adressList = new List<Adress>();
 

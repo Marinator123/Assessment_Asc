@@ -1,8 +1,7 @@
 ﻿namespace AdressLocator.Entities
 {
-    public class Adress
+    public struct Adress
     {   
-
         public string Locality { get; set; }
         public string Zip { get; set; }
         public string Street { get; set; }
