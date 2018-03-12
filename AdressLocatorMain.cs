@@ -13,8 +13,8 @@ namespace AdressLocator
         static void Main(string[] args)
         {
             /// Path to the input-file;
-            string inputFilePath = "./Data/Post_Adressdaten20170425.csv";
-            //string inputFilePath = "./Data/Adressdaten_Subset.csv";
+            //string inputFilePath = "./Data/Post_Adressdaten20170425.csv";
+            string inputFilePath = "./Data/Adressdaten_Subset.csv";
             /// Use semicolons as delimiters in the input-file
             char[] inputDelimiters = new char[] { ';' };
             /// The adress of the webservice
