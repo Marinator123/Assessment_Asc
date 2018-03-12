@@ -8,10 +8,10 @@
         /// <summary>
         ///     The latitude of a Coordinate
         /// </summary>
-        internal string Latitude { get; set; }
+        public string Latitude { get; set; }
         /// <summary>
         ///     The longitude of a Coordinate
         /// </summary>
-        internal string Longitude { get; set; }
+        public string Longitude { get; set; }
     }
 }

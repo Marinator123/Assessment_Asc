@@ -68,13 +68,14 @@ namespace AdressLocator.GeocodeApi
             string requestBody = SerializeAdress(adress);
             StringContent stringContent = new StringContent(requestBody, UnicodeEncoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync(this.apiCall, stringContent);
-            
             if (response.IsSuccessStatusCode)
             {
                 Coordinate coords = DeserializeResponse(response.Content.ReadAsStringAsync().Result);
                 adress.Coordinate = coords;
+            } else
+            {
+                Console.WriteLine(response);
             }
-            
             return adress;
         }
 
@@ -90,7 +91,7 @@ namespace AdressLocator.GeocodeApi
             List<Adress> geoLocatedAdresses = new List<Adress>();
             foreach (Adress adress in adresses)
             {
-                Adress geoLocatedAdress = this.GetLongitudeLatitude(adress).Result;
+                Adress geoLocatedAdress = GetLongitudeLatitude(adress).Result;
                 geoLocatedAdresses.Add(geoLocatedAdress);
             }
             return geoLocatedAdresses;
