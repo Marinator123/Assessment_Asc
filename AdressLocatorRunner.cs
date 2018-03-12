@@ -31,14 +31,14 @@ namespace AdressLocator
 
                 /// Extract all Adresses from the input File and store them in a list
                 List<Adress> adresses = FileToAdressConverter.ExtractAdressesFromFile(inputFilePath, inputFileDelimiters);
+                Console.WriteLine("Creating the adresses was succesful");
                 /// Geocode all the adresses and store them in a list
                 List<Adress> geoCodedAdresses = caller.GetGeocodedAdresses(adresses);
-
+                Console.WriteLine("Geocoding the adresses succesful");
                 /// Write the geocoded Adresses to the export-file
                 geoJsonExporter.OpenFile();
                 geoJsonExporter.ExportAdressesToOutput(geoCodedAdresses);
                 geoJsonExporter.CloseFile();
-
                 Console.WriteLine("Export succesful");
             }
             catch (Exception ex)
