@@ -3,7 +3,7 @@
     /// <summary>
     ///     Class to describe Street Entities extracted from the input File
     /// </summary>
-    class Street
+    internal class Street
     {
         /// <summary>
         ///     The index of the columns of a street-row, which need to be described from a street-instance
@@ -12,17 +12,17 @@
         /// <summary>
         ///     Foreign-key to an instance of the class Locations (Ordnungsnummer Post)
         /// </summary>
-        public string Onrp { get; }
+        internal string Onrp { get; }
         /// <summary>
         ///     The name of the Street
         /// </summary>
-        public string StreetName { get; }
+        internal string StreetName { get; }
 
         /// <summary>
         ///     Constructor of the Class Street which extracts all required attributes;
         /// </summary>
         /// <param name="values">An array of strings with all the Columns of a Row with type Street</param>
-        public Street(string[] values)
+        internal Street(string[] values)
         {
             Onrp = values[entryIndex[0]];
             StreetName = values[entryIndex[1]];

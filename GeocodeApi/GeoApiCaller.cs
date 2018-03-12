@@ -12,7 +12,7 @@ namespace AdressLocator.GeocodeApi
     ///     An implementation of IGeoApiCaller to get the Longitude / Latitude Information for Adresses.
     ///     Creates a Webclient to get the required Information.
     /// </summary>
-    public class GeoApiCaller : IGeoApiCaller
+    internal class GeoApiCaller : IGeoApiCaller
     {
         /// <summary>
         ///     A client to call the location-webservice
@@ -28,7 +28,7 @@ namespace AdressLocator.GeocodeApi
         /// </summary>
         /// <param name="hostAdress">The adress of the server for the webservice call</param>
         /// <param name="apiCall">The adress of the geocoding webservice</param>
-        public GeoApiCaller(string hostAdress, string apiCall)
+        internal GeoApiCaller(string hostAdress, string apiCall)
         {
             this.client = new HttpClient
             {

@@ -3,15 +3,15 @@
     /// <summary>
     ///     The Struct Coordinate with information about latitude and longitude
     /// </summary>
-    public struct Coordinate
+    internal struct Coordinate
     {
         /// <summary>
         ///     The latitude of a Coordinate
         /// </summary>
-        public string Latitude { get; set; }
+        internal string Latitude { get; set; }
         /// <summary>
         ///     The longitude of a Coordinate
         /// </summary>
-        public string Longitude { get; set; }
+        internal string Longitude { get; set; }
     }
 }

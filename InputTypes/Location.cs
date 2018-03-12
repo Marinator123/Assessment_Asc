@@ -3,7 +3,7 @@
     /// <summary>
     ///     Class to describe Location Entities extracted from the input File
     /// </summary>
-    class Location
+    internal class Location
     {
         /// <summary>
         ///     The index of the columns of a location-row, which need to be described from a location-instance
@@ -12,17 +12,17 @@
         /// <summary>
         ///     The postcode of a specific location e.g. 1000
         /// </summary>
-        public string Plz { get; }
+        internal string Plz { get; }
         /// <summary>
         ///     The name of a Location e.g. Zurich
         /// </summary>
-        public string Locality { get; }
+        internal string Locality { get; }
 
         /// <summary>
         ///     Constructor of the Class Location which extracts all required attributes;
         /// </summary>
         /// <param name="values">An array of strings with all the Columns of a Row with type Location</param>
-        public Location(string[] values)
+        internal Location(string[] values)
         {
             Plz = values[entryIndex[0]];
             Locality = values[entryIndex[1]];
