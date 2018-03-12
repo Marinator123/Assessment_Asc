@@ -76,7 +76,6 @@ namespace AdressLocator.FileIO
                         adressList.Add(adress);
                     }
                 }
-
             }
             return adressList;
         }

@@ -1,8 +1,8 @@
 ﻿namespace AdressLocator.InputTypes
 {
-    class Building : IInputType
+    class Building 
     {
-        static private int[] entryList = new int[]{ 2, 3 };
+        static readonly private int[] entryList = new int[]{ 2, 3 };
         public string StreetId { get; }
         public string Hnr { get; }
 
@@ -10,11 +10,6 @@
         {
             StreetId = values[entryList[0]];
             Hnr = values[entryList[1]];
-        }
-
-        public int[] GetEntryList()
-        {
-            return entryList;
         }
     }
 }

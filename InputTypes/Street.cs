@@ -1,8 +1,8 @@
 ﻿namespace AdressLocator.InputTypes
 {
-    class Street : IInputType
+    class Street
     {
-        private static int[] entryList = new int[] { 2, 4 };
+        private readonly static int[] entryList = new int[] { 2, 4 };
         public string Onrp { get; }
         public string StreetName { get; }
 
@@ -10,11 +10,6 @@
         {
             Onrp = values[entryList[0]];
             StreetName = values[entryList[1]];
-        }
-
-        public int[] GetEntryList()
-        {
-            return entryList;
         }
     }
 }
