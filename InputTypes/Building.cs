@@ -2,6 +2,9 @@
 {
     class Building 
     {
+        /// <summary>
+        /// 
+        /// </summary>
         static readonly private int[] entryList = new int[]{ 2, 3 };
         public string StreetId { get; }
         public string Hnr { get; }

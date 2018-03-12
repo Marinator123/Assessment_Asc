@@ -47,7 +47,7 @@ namespace AdressLocator.GeocodeApi
             return adress;
         }
 
-        public List<Adress> GetGeoLocatedAdresses(List<Adress> adresses)
+        public List<Adress> GetGeocodedAdresses(List<Adress> adresses)
         {
             List<Adress> geoLocatedAdresses = new List<Adress>();
             foreach (Adress adress in adresses)

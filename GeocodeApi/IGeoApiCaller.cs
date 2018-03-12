@@ -7,6 +7,6 @@ namespace AdressLocator.GeocodeApi
     interface IGeoApiCaller
     {
         Task<Adress> GetLongitudeLatitude(Adress adress);
-        List<Adress> GetGeoLocatedAdresses(List<Adress> adress);
+        List<Adress> GetGeocodedAdresses(List<Adress> adress);
     }
 }
