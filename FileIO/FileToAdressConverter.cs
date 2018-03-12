@@ -71,7 +71,7 @@ namespace AdressLocator.FileIO
                             Locality = correspondingLocation.Locality,
                             Zip = correspondingLocation.Plz,
                             Street = correspondingStreet.StreetName,
-                            StreetNumber = building.Hnr ?? ""
+                            StreetNumber = building.StreetNumber ?? ""
                         };
                         adressList.Add(adress);
                     }

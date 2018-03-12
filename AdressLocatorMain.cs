@@ -15,12 +15,12 @@ namespace AdressLocator
     class AdressLocatorMain
     {
         /// <summary>
-        /// Converts the provided inputFile into an Adresslist, Geocodes the adresses and exports them to the provided outputFile
+        ///     Converts the provided inputFile into an Adresslist, Geocodes the adresses and exports them to the provided outputFile
         /// </summary>
         /// <param name="inputFilePath">Relative or absolut Path to the input adress-file</param>
         /// <param name="inputFileDelimiters">Delimiters to separate the columns of a row in the input file</param>
         /// <param name="hostAdress">The Adress of the Webservice</param>
-        /// <param name="apiCall">The apiCall of the webservice for the geocoding call</param>
+        /// <param name="apiCall">The apiCall of the webservice for the geocoding</param>
         /// <param name="outputFilePath">The path to the outputfile</param>
         private static void RunAdressLocator(string inputFilePath, char[] inputFileDelimiters, string hostAdress, string apiCall, 
             string outputFilePath)
