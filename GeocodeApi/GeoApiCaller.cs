@@ -58,6 +58,4 @@ namespace AdressLocator.GeocodeApi
             return geoLocatedAdresses;
         }
     }
-
-
 }
